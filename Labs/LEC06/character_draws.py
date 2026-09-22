@@ -1,10 +1,13 @@
 def move_circle():
+    print('circle')
     pass
 
 def move_rectangle():
+    print('rectangle')
     pass
 
 def move_triangle():
+    print('triangle')
     pass
 
 while True:
