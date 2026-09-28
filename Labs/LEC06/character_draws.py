@@ -30,6 +30,14 @@ def draw_right():
     for x in range(200, 600, 5):
         new_func(x, 100)
 
+def move_1():
+    pass
+
+def move_2():
+    pass
+
+def move_3():
+    pass
     
 def move_circle():
     clear_canvas()
@@ -53,7 +61,9 @@ def move_rectangle():
     pass
 
 def move_triangle():
-    print('triangle')
+    move_1()
+    move_2()
+    move_3()
     pass
 
 while True:
