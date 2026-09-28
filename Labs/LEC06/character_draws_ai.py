@@ -26,15 +26,27 @@ def move_rectangle_top():
 
 
 def move_rectangle_left():
-	pass
+	for y in range(150, 451, 5):
+		clear_canvas()
+		character.draw(600, y)
+		update_canvas()
+		delay(0.01)
 
 
 def move_rectangle_bottom():
-	pass
+	for x in range(600, 199, -5):
+		clear_canvas()
+		character.draw(x, 450)
+		update_canvas()
+		delay(0.01)
 
 
 def move_rectangle_right():
-	pass
+	for y in range(450, 149, -5):
+		clear_canvas()
+		character.draw(200, y)
+		update_canvas()
+		delay(0.01)
 
 
 def move_rectangle():
