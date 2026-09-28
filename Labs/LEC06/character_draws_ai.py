@@ -17,8 +17,27 @@ def move_circle():
 		delay(0.01)
 
 
-def move_rectangle():
+def move_rectangle_top():
 	pass
+
+
+def move_rectangle_left():
+	pass
+
+
+def move_rectangle_bottom():
+	pass
+
+
+def move_rectangle_right():
+	pass
+
+
+def move_rectangle():
+	move_rectangle_top()
+	move_rectangle_left()
+	move_rectangle_bottom()
+	move_rectangle_right()
 
 
 def move_triangle():
