@@ -43,6 +43,10 @@ def move_2():
     pass
 
 def move_3():
+    for i in range(101):
+        x = 600 - 2 * i
+        y = 150 + 3.5 * i
+        new_func(x, y)
     pass
     
 def move_circle():
