@@ -19,12 +19,10 @@ def draw_top():
 def draw_left():
     for x in range(600, 200, -5):
         new_func(x ,500)
-    pass    
 
 def draw_bottom():
     for y in range(500, 100, -5):
         new_func(200 ,y)
-    pass
 
 def draw_right():
     for x in range(200, 600, 5):
@@ -35,19 +33,16 @@ def move_1():
         x = 400 - 2 * i
         y = 500 - 3.5 * i
         new_func(x,y)
-    pass
 
 def move_2():
     for x in range(200, 601, 4):
         new_func(x, 150)
-    pass
 
 def move_3():
     for i in range(101):
         x = 600 - 2 * i
         y = 150 + 3.5 * i
         new_func(x, y)
-    pass
     
 def move_circle():
     clear_canvas()
@@ -58,7 +53,6 @@ def move_circle():
         x= 400 + 200 * math.cos(theta)
         y= 300 + 200 * math.sin(theta)
         new_func(x,y)
-    pass
 
 def move_rectangle():
     clear_canvas()
@@ -68,19 +62,16 @@ def move_rectangle():
     draw_left()
     draw_bottom()
     draw_right()
-    pass
 
 def move_triangle():
     move_1()
     move_2()
     move_3()
-    pass
 
 while True:
     move_circle()
     move_rectangle()
     move_triangle()
 
-    pass
 
 
