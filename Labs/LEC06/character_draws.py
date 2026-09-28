@@ -22,7 +22,13 @@ def draw_bottom():
     pass
 
 def draw_right():
-    pass
+    for x in range(50, 750, 5):
+            clear_canvas()
+            character.draw(x, 100)
+            update_canvas()
+            delay(0.01)
+
+    
 def move_circle():
     clear_canvas()
     character.draw(400, 300)
