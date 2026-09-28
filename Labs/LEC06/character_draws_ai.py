@@ -56,8 +56,22 @@ def move_rectangle():
 	move_rectangle_right()
 
 
-def move_triangle():
+def move_triangle_first():
 	pass
+
+
+def move_triangle_second():
+	pass
+
+
+def move_triangle_third():
+	pass
+
+
+def move_triangle():
+	move_triangle_first()
+	move_triangle_second()
+	move_triangle_third()
 
 
 while True:
