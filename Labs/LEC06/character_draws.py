@@ -31,6 +31,10 @@ def draw_right():
         new_func(x, 100)
 
 def move_1():
+    for i in range(101):
+        x = 400 - 2 * i
+        y = 500 - 3.5 * i
+        new_func(x,y)
     pass
 
 def move_2():
