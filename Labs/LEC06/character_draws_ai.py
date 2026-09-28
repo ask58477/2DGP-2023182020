@@ -57,7 +57,13 @@ def move_rectangle():
 
 
 def move_triangle_first():
-	pass
+	for step in range(101):
+		x = 400 - 2 * step
+		y = 500 - 3.5 * step
+		clear_canvas()
+		character.draw(x, y)
+		update_canvas()
+		delay(0.01)
 
 
 def move_triangle_second():
