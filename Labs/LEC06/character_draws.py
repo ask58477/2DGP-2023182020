@@ -5,6 +5,12 @@ import math
 open_canvas(800, 600)
 character = load_image('character.png')
 
+def new_func(x):
+    clear_canvas()
+    character.draw(x, 100)
+    update_canvas()
+    delay(0.01)
+
 def draw_top():
     y=300
     while y<500:
@@ -22,11 +28,8 @@ def draw_bottom():
     pass
 
 def draw_right():
-    for x in range(50, 750, 5):
-            clear_canvas()
-            character.draw(x, 100)
-            update_canvas()
-            delay(0.01)
+    for x in range(200, 600, 5):
+            new_func(x)
 
     
 def move_circle():
