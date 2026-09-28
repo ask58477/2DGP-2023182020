@@ -18,7 +18,11 @@ def move_circle():
 
 
 def move_rectangle_top():
-	pass
+	for x in range(200, 601, 5):
+		clear_canvas()
+		character.draw(x, 150)
+		update_canvas()
+		delay(0.01)
 
 
 def move_rectangle_left():
