@@ -67,11 +67,23 @@ def move_triangle_first():
 
 
 def move_triangle_second():
-	pass
+	for step in range(101):
+		x = 200 + 4 * step
+		y = 150
+		clear_canvas()
+		character.draw(x, y)
+		update_canvas()
+		delay(0.01)
 
 
 def move_triangle_third():
-	pass
+	for step in range(101):
+		x = 600 - 2 * step
+		y = 150 + 3.5 * step
+		clear_canvas()
+		character.draw(x, y)
+		update_canvas()
+		delay(0.01)
 
 
 def move_triangle():
