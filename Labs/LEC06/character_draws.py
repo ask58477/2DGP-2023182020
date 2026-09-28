@@ -6,11 +6,21 @@ open_canvas(800, 600)
 character = load_image('character.png')
 
 def draw_top():
-    pass
+    y=300
+    while y<500:
+        clear_canvas()
+        character.draw(600,y)
+        update_canvas()
+        y+=2
+        delay(0.01)
+    
+
 def draw_left():
     pass    
+
 def draw_bottom():
     pass
+
 def draw_right():
     pass
 def move_circle():
