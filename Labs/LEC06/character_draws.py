@@ -17,6 +17,8 @@ def draw_top():
     
 
 def draw_left():
+    for x in range(600, 200, -5):
+        new_func(x ,500)
     pass    
 
 def draw_bottom():
@@ -24,7 +26,7 @@ def draw_bottom():
 
 def draw_right():
     for x in range(200, 600, 5):
-            new_func(x, 100)
+        new_func(x, 100)
 
     
 def move_circle():
