@@ -22,6 +22,8 @@ def draw_left():
     pass    
 
 def draw_bottom():
+    for y in range(500, 100, -5):
+        new_func(200 ,y)
     pass
 
 def draw_right():
