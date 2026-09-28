@@ -24,7 +24,7 @@ def draw_bottom():
 
 def draw_right():
     for x in range(200, 600, 5):
-            new_func(x, 200)
+            new_func(x, 100)
 
     
 def move_circle():
@@ -35,10 +35,7 @@ def move_circle():
         theta = math.radians(degree)
         x= 400 + 200 * math.cos(theta)
         y= 300 + 200 * math.sin(theta)
-        clear_canvas()
-        character.draw(x,y)
-        update_canvas()
-        delay(0.01)
+        new_func(x,y)
     pass
 
 def move_rectangle():
