@@ -38,6 +38,8 @@ def move_1():
     pass
 
 def move_2():
+    for x in range(200, 601, 4):
+        new_func(x, 150)
     pass
 
 def move_3():
