@@ -10,15 +10,25 @@ def one():
     for x in range(400,600,5):
             clear_canvas()
             character.clip_draw(
-                frame * 26, 705, 26, 26, x, 300
+                frame * 29 + 2, 705, 26, 26, x, 300
             )
             update_canvas()
     
             frame =(frame + 1) % 12
-            delay(0.1)
+            delay(0.05)
     pass
 
 def two():
+    frame = 0
+    for x in range(600,400,-5):
+            clear_canvas()
+            character.clip_draw(
+                frame * 29 + 2, 677, 26, 26, x, 300
+            )
+            update_canvas()
+        
+            frame =(frame + 1) % 8
+            delay(0.05)
     pass
 
 def three():
