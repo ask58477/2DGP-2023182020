@@ -149,8 +149,10 @@ def four():
     pass
 
 while True:
-     
-    one()
+
+    for i in range(5):
+        one()
+
 
     two()
 
