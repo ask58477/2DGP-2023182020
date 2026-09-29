@@ -39,18 +39,39 @@ def one():
         delay(0.05)
 
 
+
 def two():
+    frames = [
+        (5, 677, 27, 20),
+        (38, 676, 24, 22),
+        (68, 676, 23, 23),
+        (97, 676, 23, 23),
+        (126, 677, 24, 21),
+        (156, 676, 23, 23),
+        (185, 676, 23, 22),
+        (214, 676, 25, 22),
+        (251, 677, 24, 21),
+        (281, 677, 9, 26),
+        (296, 677, 24, 13)
+    ]
+
     frame = 0
-    for x in range(600,400,-5):
-            clear_canvas()
-            character.clip_composite_draw(
-                frame * 29, 677, 29, 29, 0, 'h', x, 300, 50, 50
-            )
-            update_canvas()
-        
-            frame =(frame + 1) % 8
-            delay(0.05)
-    pass
+
+    for x in range(600, 400, -5):
+        clear_canvas()
+
+        fx, fy, fw, fh = frames[frame]
+
+        character.clip_composite_draw(
+            fx, fy, fw, fh,
+            0, 'h',
+            x, 300, 50, 50
+        )
+
+        update_canvas()
+
+        frame = (frame + 1) % len(frames)
+        delay(0.05)
 
 def three():
     frame = 0
