@@ -74,17 +74,37 @@ def two():
         delay(0.05)
 
 def three():
+    # 5번째 줄 점프 프레임 (마지막 11번째 제외)
+    frames = [
+        (5, 740, 23, 22),
+        (34, 740, 24, 22),
+        (63, 740, 21, 27),
+        (90, 741, 19, 24),
+        (115, 740, 21, 21),
+        (142, 740, 21, 23),
+        (169, 741, 23, 24),
+        (197, 740, 25, 21),
+        (228, 740, 20, 31),
+        (255, 740, 19, 31)
+    ]
+
     frame = 0
-    for y in range(300,500,5):
-            clear_canvas()
-            character.clip_draw(
-                frame * 29, 741, 29, 29, 400, y
-            )
-            update_canvas()
-        
-            frame =(frame + 1) % 11
-            delay(0.05)
-    pass
+
+    # 점프: 위로 올라가기
+    for y in range(300, 401, 10):
+        clear_canvas()
+
+        fx, fy, fw, fh = frames[frame]
+
+        character.clip_draw(
+            fx, fy, fw, fh,
+            400, y, 50, 50
+        )
+
+        update_canvas()
+
+        frame = (frame + 1) % len(frames)
+        delay(0.05)
 
 def four():
     pass
