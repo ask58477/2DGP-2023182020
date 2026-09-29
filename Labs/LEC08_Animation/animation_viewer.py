@@ -156,7 +156,8 @@ while True:
     for i in range(5):
         two()
 
-    three()
+    for i in range(5):
+        three()
 
     four()
     pass
