@@ -119,7 +119,32 @@ def three():
         frame = (frame + 1) % len(frames)
         delay(0.05) 
 
+
 def four():
+    frames = [
+        (4, 639, 24, 28),
+        (34, 639, 23, 30),
+        (61, 639, 25, 29),
+        (89, 639, 24, 28),
+        (118, 639, 25, 29)
+    ]
+
+    for frame in range(len(frames)):
+        clear_canvas()
+
+        fx, fy, fw, fh = frames[frame]
+
+        character.clip_draw(
+            fx, fy, fw, fh,
+            400, 300, 50, 50
+        )
+
+        update_canvas()
+
+        if frame == 4:
+            delay(0.3)
+        else:
+            delay(0.05)
     pass
 
 while True:
