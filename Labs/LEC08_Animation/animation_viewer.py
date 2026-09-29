@@ -35,7 +35,7 @@ def three():
     frame = 0
     for y in range(300,500,5):
             clear_canvas()
-            character.clip_composite_draw(
+            character.clip_draw(
                 frame * 29, 741, 29, 29, 400, y
             )
             update_canvas()
