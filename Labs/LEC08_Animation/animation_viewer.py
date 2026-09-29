@@ -153,12 +153,14 @@ while True:
     for i in range(5):
         one()
 
+    delay(1)
     for i in range(5):
         two()
-
+    delay(1)
     for i in range(5):
         three()
-
+    delay(1)
     for i in range(5):
         four()
+    delay(1)
     pass
