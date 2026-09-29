@@ -5,6 +5,7 @@ open_canvas()
 character = load_image('cuby.png')
 
 
+
 def one():
     frames = [
         (5, 709, 20, 20),
