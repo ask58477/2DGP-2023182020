@@ -6,17 +6,38 @@ character = load_image('cuby.png')
 
 
 def one():
+    frames = [
+        (5, 709, 20, 20),
+        (31, 709, 20, 21),
+        (57, 709, 20, 21),
+        (83, 709, 20, 20),
+        (109, 709, 21, 19),
+        (136, 709, 22, 19),
+        (164, 709, 22, 20),
+        (192, 709, 27, 21),
+        (225, 709, 26, 21),
+        (257, 709, 24, 20),
+        (287, 709, 21, 19),
+        (315, 709, 19, 20)
+    ]
+
     frame = 0
-    for x in range(400,600,5):
-            clear_canvas()
-            character.clip_draw(
-                frame * 29, 705, 26, 26, x, 300
-            )
-            update_canvas()
-    
-            frame =(frame + 1) % 12
-            delay(0.05)
-    pass
+
+    for x in range(400, 600, 5):
+        clear_canvas()
+
+        fx, fy, fw, fh = frames[frame]
+
+        character.clip_draw(
+            fx, fy, fw, fh,
+            x, 300, 50, 50
+        )
+
+        update_canvas()
+
+        frame = (frame + 1) % len(frames)
+        delay(0.05)
+
 
 def two():
     frame = 0
