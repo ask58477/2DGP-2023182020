@@ -22,8 +22,8 @@ def two():
     frame = 0
     for x in range(600,400,-5):
             clear_canvas()
-            character.clip_draw(
-                frame * 29, 677, 26, 26, x, 300
+            character.clip_composite_draw(
+                frame * 29, 677, 29, 29, 0, 'h', x, 300, 50, 50
             )
             update_canvas()
         
