@@ -153,8 +153,8 @@ while True:
     for i in range(5):
         one()
 
-
-    two()
+    for i in range(5):
+        two()
 
     three()
 
