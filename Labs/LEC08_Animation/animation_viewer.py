@@ -10,7 +10,7 @@ def one():
     for x in range(400,600,5):
             clear_canvas()
             character.clip_draw(
-                frame * 29 + 2, 705, 26, 26, x, 300
+                frame * 29, 705, 26, 26, x, 300
             )
             update_canvas()
     
@@ -23,7 +23,7 @@ def two():
     for x in range(600,400,-5):
             clear_canvas()
             character.clip_draw(
-                frame * 29 + 2, 677, 26, 26, x, 300
+                frame * 29, 677, 26, 26, x, 300
             )
             update_canvas()
         
