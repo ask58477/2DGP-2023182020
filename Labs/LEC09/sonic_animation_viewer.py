@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from pico2d import (
     SDL_KEYDOWN,
     SDL_QUIT,
@@ -6,6 +8,7 @@ from pico2d import (
     close_canvas,
     delay,
     get_events,
+    load_image,
     open_canvas,
     update_canvas,
 )
@@ -13,6 +16,14 @@ from pico2d import (
 
 CANVAS_WIDTH = 800
 CANVAS_HEIGHT = 600
+SPRITE_PATH = Path(__file__).with_name('sonic-sprite.png')
+
+
+def load_sprite():
+    if not SPRITE_PATH.is_file():
+        raise FileNotFoundError(f'스프라이트 파일을 찾을 수 없습니다: {SPRITE_PATH}')
+
+    return load_image(str(SPRITE_PATH))
 
 
 def main():
