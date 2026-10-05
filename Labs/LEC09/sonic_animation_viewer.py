@@ -1,4 +1,6 @@
 from pathlib import Path
+from dataclasses import dataclass
+import time
 
 from pico2d import (
     SDL_KEYDOWN,
@@ -18,6 +20,10 @@ CANVAS_WIDTH = 800
 CANVAS_HEIGHT = 600
 SPRITE_SCALE = 6
 SPRITE_HEIGHT = 525
+FRAME_INTERVAL = 0.08
+ANIMATION_REPEATS = 5
+ANIMATION_PAUSE = 1.0
+EVENT_POLL_INTERVAL = 0.01
 SPRITE_PATH = Path(__file__).with_name('sonic-sprite.png')
 Frame = tuple[int, int, int, int]
 Animation = tuple[str, tuple[Frame, ...]]
@@ -155,6 +161,15 @@ ANIMATIONS: tuple[Animation, ...] = (
         ),
     ),
 )
+
+
+@dataclass
+class PlaybackState:
+    animation_index: int = 0
+    frame_index: int = 0
+    repetitions: int = 0
+    next_frame_at: float = 0.0
+    pause_until: float | None = None
 
 
 def load_sprite():
