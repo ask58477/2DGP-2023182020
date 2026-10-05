@@ -195,6 +195,8 @@ def draw_frame(sprite, frame: Frame):
 
 
 def advance_playback(state: PlaybackState, now: float):
+    if state.pause_until is not None:
+        return
     if now < state.next_frame_at:
         return
 
@@ -203,6 +205,10 @@ def advance_playback(state: PlaybackState, now: float):
     if state.frame_index == len(frames):
         state.frame_index = 0
         state.repetitions += 1
+        if state.repetitions == ANIMATION_REPEATS:
+            state.frame_index = len(frames) - 1
+            state.pause_until = now + ANIMATION_PAUSE
+            return
     state.next_frame_at = now + FRAME_INTERVAL
 
 
