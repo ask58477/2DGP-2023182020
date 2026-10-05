@@ -21,6 +21,9 @@ CANVAS_HEIGHT = 600
 SPRITE_SCALE = 6
 MAX_FRAME_CANVAS_RATIO = 0.75
 SPRITE_HEIGHT = 525
+MOVEMENT_SPEED = 5
+MOVEMENT_MIN_X = CANVAS_WIDTH * 0.2
+MOVEMENT_MAX_X = CANVAS_WIDTH * 0.8
 FRAME_INTERVAL = 0.08
 ANIMATION_REPEATS = 5
 ANIMATION_PAUSE = 1.0
@@ -162,6 +165,10 @@ ANIMATIONS: tuple[Animation, ...] = (
         ),
     ),
 )
+MOVEMENT_DIRECTIONS = {
+    '동작 01': 1,
+    '동작 02': -1,
+}
 
 
 @dataclass
@@ -171,6 +178,8 @@ class PlaybackState:
     repetitions: int = 0
     next_frame_at: float = 0.0
     pause_until: float | None = None
+    position_x: float = CANVAS_WIDTH / 2
+    movement_direction: int = 1
 
 
 def load_sprite():
@@ -180,7 +189,12 @@ def load_sprite():
     return load_image(str(SPRITE_PATH))
 
 
-def draw_frame(sprite, frame: Frame):
+def draw_frame(
+    sprite,
+    frame: Frame,
+    position_x: float = CANVAS_WIDTH // 2,
+    facing_left: bool = False,
+):
     source_x, source_y, source_width, source_height = frame
     pico2d_y = SPRITE_HEIGHT - source_y - source_height
     display_scale = min(
@@ -188,16 +202,33 @@ def draw_frame(sprite, frame: Frame):
         CANVAS_WIDTH * MAX_FRAME_CANVAS_RATIO / source_width,
         CANVAS_HEIGHT * MAX_FRAME_CANVAS_RATIO / source_height,
     )
-    sprite.clip_draw(
-        source_x,
-        pico2d_y,
-        source_width,
-        source_height,
-        CANVAS_WIDTH // 2,
+    destination = (
+        position_x,
         CANVAS_HEIGHT // 2,
         round(source_width * display_scale),
         round(source_height * display_scale),
     )
+    if facing_left:
+        sprite.clip_composite_draw(
+            source_x, pico2d_y, source_width, source_height, 0, 'h', *destination
+        )
+    else:
+        sprite.clip_draw(
+            source_x, pico2d_y, source_width, source_height, *destination
+        )
+
+
+def move_character(state: PlaybackState):
+    if state.movement_direction == 0:
+        return
+
+    state.position_x += MOVEMENT_SPEED * state.movement_direction
+    if state.position_x <= MOVEMENT_MIN_X:
+        state.position_x = MOVEMENT_MIN_X
+        state.movement_direction = 1
+    elif state.position_x >= MOVEMENT_MAX_X:
+        state.position_x = MOVEMENT_MAX_X
+        state.movement_direction = -1
 
 
 def advance_playback(state: PlaybackState, now: float):
@@ -205,6 +236,10 @@ def advance_playback(state: PlaybackState, now: float):
         if now < state.pause_until:
             return
         state.animation_index = (state.animation_index + 1) % len(ANIMATIONS)
+        state.position_x = CANVAS_WIDTH / 2
+        state.movement_direction = MOVEMENT_DIRECTIONS.get(
+            ANIMATIONS[state.animation_index][0], 0
+        )
         state.frame_index = 0
         state.repetitions = 0
         state.pause_until = None
@@ -214,6 +249,7 @@ def advance_playback(state: PlaybackState, now: float):
         return
 
     frames = ANIMATIONS[state.animation_index][1]
+    move_character(state)
     state.frame_index += 1
     if state.frame_index == len(frames):
         state.frame_index = 0
@@ -244,7 +280,12 @@ def main():
             advance_playback(state, time.monotonic())
             frame = ANIMATIONS[state.animation_index][1][state.frame_index]
             clear_canvas()
-            draw_frame(sprite, frame)
+            draw_frame(
+                sprite,
+                frame,
+                state.position_x,
+                state.movement_direction < 0,
+            )
             update_canvas()
             delay(0.01)
     finally:
