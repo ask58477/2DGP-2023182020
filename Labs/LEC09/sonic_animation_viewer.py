@@ -16,6 +16,8 @@ from pico2d import (
 
 CANVAS_WIDTH = 800
 CANVAS_HEIGHT = 600
+SPRITE_SCALE = 6
+SPRITE_HEIGHT = 525
 SPRITE_PATH = Path(__file__).with_name('sonic-sprite.png')
 Frame = tuple[int, int, int, int]
 Animation = tuple[str, tuple[Frame, ...]]
@@ -47,22 +49,41 @@ def load_sprite():
     return load_image(str(SPRITE_PATH))
 
 
+def draw_frame(sprite, frame: Frame):
+    source_x, source_y, source_width, source_height = frame
+    pico2d_y = SPRITE_HEIGHT - source_y - source_height
+    sprite.clip_draw(
+        source_x,
+        pico2d_y,
+        source_width,
+        source_height,
+        CANVAS_WIDTH // 2,
+        CANVAS_HEIGHT // 2,
+        source_width * SPRITE_SCALE,
+        source_height * SPRITE_SCALE,
+    )
+
+
 def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
-    running = True
+    try:
+        sprite = load_sprite()
+        frame = ANIMATIONS[0][1][0]
+        running = True
 
-    while running:
-        for event in get_events():
-            if event.type == SDL_QUIT or (
-                event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE
-            ):
-                running = False
+        while running:
+            for event in get_events():
+                if event.type == SDL_QUIT or (
+                    event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE
+                ):
+                    running = False
 
-        clear_canvas()
-        update_canvas()
-        delay(0.01)
-
-    close_canvas()
+            clear_canvas()
+            draw_frame(sprite, frame)
+            update_canvas()
+            delay(0.01)
+    finally:
+        close_canvas()
 
 
 if __name__ == '__main__':
