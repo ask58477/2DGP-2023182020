@@ -194,11 +194,23 @@ def draw_frame(sprite, frame: Frame):
     )
 
 
+def advance_playback(state: PlaybackState, now: float):
+    if now < state.next_frame_at:
+        return
+
+    frames = ANIMATIONS[state.animation_index][1]
+    state.frame_index += 1
+    if state.frame_index == len(frames):
+        state.frame_index = 0
+        state.repetitions += 1
+    state.next_frame_at = now + FRAME_INTERVAL
+
+
 def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     try:
         sprite = load_sprite()
-        frame = ANIMATIONS[0][1][0]
+        state = PlaybackState(next_frame_at=time.monotonic())
         running = True
 
         while running:
@@ -208,6 +220,8 @@ def main():
                 ):
                     running = False
 
+            advance_playback(state, time.monotonic())
+            frame = ANIMATIONS[state.animation_index][1][state.frame_index]
             clear_canvas()
             draw_frame(sprite, frame)
             update_canvas()
