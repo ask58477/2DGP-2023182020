@@ -208,7 +208,7 @@ def advance_playback(state: PlaybackState, now: float):
         state.frame_index = 0
         state.repetitions = 0
         state.pause_until = None
-        state.next_frame_at = now
+        state.next_frame_at = now + FRAME_INTERVAL
         return
     if now < state.next_frame_at:
         return
@@ -229,7 +229,9 @@ def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     try:
         sprite = load_sprite()
-        state = PlaybackState(next_frame_at=time.monotonic())
+        state = PlaybackState(
+            next_frame_at=time.monotonic() + FRAME_INTERVAL
+        )
         running = True
 
         while running:
