@@ -19,6 +19,7 @@ from pico2d import (
 CANVAS_WIDTH = 800
 CANVAS_HEIGHT = 600
 SPRITE_SCALE = 6
+MAX_FRAME_CANVAS_RATIO = 0.75
 SPRITE_HEIGHT = 525
 FRAME_INTERVAL = 0.08
 ANIMATION_REPEATS = 5
@@ -182,6 +183,11 @@ def load_sprite():
 def draw_frame(sprite, frame: Frame):
     source_x, source_y, source_width, source_height = frame
     pico2d_y = SPRITE_HEIGHT - source_y - source_height
+    display_scale = min(
+        SPRITE_SCALE,
+        CANVAS_WIDTH * MAX_FRAME_CANVAS_RATIO / source_width,
+        CANVAS_HEIGHT * MAX_FRAME_CANVAS_RATIO / source_height,
+    )
     sprite.clip_draw(
         source_x,
         pico2d_y,
@@ -189,8 +195,8 @@ def draw_frame(sprite, frame: Frame):
         source_height,
         CANVAS_WIDTH // 2,
         CANVAS_HEIGHT // 2,
-        source_width * SPRITE_SCALE,
-        source_height * SPRITE_SCALE,
+        round(source_width * display_scale),
+        round(source_height * display_scale),
     )
 
 
