@@ -33,11 +33,16 @@ def handle_events():
 
 
 def update_position():
-    global character_x, character_y
+    global character_x, character_y, character_facing_left
 
     previous_x, previous_y = character_x, character_y
     move_x = int(SDLK_RIGHT in pressed_keys) - int(SDLK_LEFT in pressed_keys)
     move_y = int(SDLK_UP in pressed_keys) - int(SDLK_DOWN in pressed_keys)
+
+    if move_x < 0:
+        character_facing_left = True
+    elif move_x > 0:
+        character_facing_left = False
 
     if move_x != 0 or move_y != 0:
         movement_length = (move_x ** 2 + move_y ** 2) ** 0.5
@@ -63,7 +68,8 @@ def update_animation(is_moving):
 def draw():
     clear_canvas()
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100, 100, 100, character_x, character_y)
+    source_y = 0 if character_facing_left else 100
+    character.clip_draw(frame * 100, source_y, 100, 100, character_x, character_y)
     update_canvas()
 
 
