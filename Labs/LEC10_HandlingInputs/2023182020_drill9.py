@@ -10,9 +10,26 @@ tuk_ground = load_image('TUK_GROUND.png')
 character = load_image('animation_sheet.png')
 CHARACTER_WIDTH, CHARACTER_HEIGHT = 100, 100
 character_x, character_y = TUK_WIDTH // 2, TUK_HEIGHT // 2
+MOVE_SPEED = 5
+DIRECTION_KEYS = {SDLK_UP, SDLK_DOWN, SDLK_LEFT, SDLK_RIGHT}
+pressed_keys = set()
+running = True
+frame = 0
+character_facing_left = False
 
 def handle_events():
-    pass
+    global running
+
+    for event in get_events():
+        if event.type == SDL_QUIT:
+            running = False
+        elif event.type == SDL_KEYDOWN:
+            if event.key == SDLK_ESCAPE:
+                running = False
+            elif event.key in DIRECTION_KEYS:
+                pressed_keys.add(event.key)
+        elif event.type == SDL_KEYUP:
+            pressed_keys.discard(event.key)
 
 
 def update_position():
