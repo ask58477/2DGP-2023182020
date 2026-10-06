@@ -35,10 +35,21 @@ def handle_events():
 def update_position():
     global character_x, character_y
 
+    previous_x, previous_y = character_x, character_y
+    move_x = int(SDLK_RIGHT in pressed_keys) - int(SDLK_LEFT in pressed_keys)
+    move_y = int(SDLK_UP in pressed_keys) - int(SDLK_DOWN in pressed_keys)
+
+    if move_x != 0 or move_y != 0:
+        movement_length = (move_x ** 2 + move_y ** 2) ** 0.5
+        character_x += move_x / movement_length * MOVE_SPEED
+        character_y += move_y / movement_length * MOVE_SPEED
+
     half_width = CHARACTER_WIDTH // 2
     half_height = CHARACTER_HEIGHT // 2
     character_x = max(half_width, min(character_x, TUK_WIDTH - half_width))
     character_y = max(half_height, min(character_y, TUK_HEIGHT - half_height))
+    return character_x != previous_x or character_y != previous_y
+
 
 
 def update_animation():
