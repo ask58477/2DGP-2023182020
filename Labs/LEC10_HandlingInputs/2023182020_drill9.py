@@ -51,15 +51,37 @@ def update_position():
     return character_x != previous_x or character_y != previous_y
 
 
+def update_animation(is_moving):
+    global frame
 
-def update_animation():
-    pass
+    if is_moving:
+        frame = (frame + 1) % 8
+    else:
+        frame = 0
 
 
 def draw():
-    pass
+    clear_canvas()
+    tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
+    character.clip_draw(frame * 100, 100, 100, 100, character_x, character_y)
+    update_canvas()
 
 
 def main():
-    pass
+    global running
+
+    while running:
+        handle_events()
+        if not running:
+            break
+
+        is_moving = update_position()
+        update_animation(is_moving)
+        draw()
+        delay(0.05)
+
+    close_canvas()
+
+
+main()
 
