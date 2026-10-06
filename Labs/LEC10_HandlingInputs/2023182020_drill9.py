@@ -65,11 +65,17 @@ def update_animation(is_moving):
         frame = 0
 
 
-def draw():
+def draw(is_moving):
     clear_canvas()
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    source_y = 0 if character_facing_left else 100
-    character.clip_draw(frame * 100, source_y, 100, 100, character_x, character_y)
+    if is_moving:
+        source_x = frame * 100
+        source_y = 0 if character_facing_left else 100
+    else:
+        source_x = 0
+        source_y = 200 if character_facing_left else 300
+
+    character.clip_draw(source_x, source_y, 100, 100, character_x, character_y)
     update_canvas()
 
 
@@ -83,7 +89,7 @@ def main():
 
         is_moving = update_position()
         update_animation(is_moving)
-        draw()
+        draw(is_moving)
         delay(0.05)
 
     close_canvas()
